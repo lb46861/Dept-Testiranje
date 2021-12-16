@@ -3,25 +3,21 @@ import Button from "./components/Button";
 
 function App() {
   const [myRndClrs, setRndClrs] = useState([]);
-  const [myRndClr, setRndClr] = useState({});
   const [currColor, setCurrColor] = useState("");
 
   // Get random color on click
   const getRandom = async () => {
     const newClr = await fetchRandom();
-    setRndClr(newClr);
-    setCurrColor(myRndClr.colors[0].hex);
+    setCurrColor(newClr.colors[0].hex);
 
     // If newColor is not in the list add it
     if (
       !myRndClrs.find(
-        (randomColor) => randomColor.colors[0].hex === myRndClr.colors[0].hex
+        (randomColor) => randomColor.colors[0].hex === newClr.colors[0].hex
       )
     ) {
-      setRndClrs([...myRndClrs, myRndClr]);
+      setRndClrs([...myRndClrs, newClr]);
     }
-
-    console.log(myRndClrs);
   };
 
   // Fetch random color
@@ -30,7 +26,6 @@ function App() {
       cache: "no-cache",
     });
     const data = await res.json();
-
     return data;
   };
 
