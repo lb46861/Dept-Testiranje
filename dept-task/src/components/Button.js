@@ -4,7 +4,7 @@ const Button = ({ onClick, btnColor }) => {
       <button
         className="btn"
         onClick={onClick}
-        style={{ color: `#${btnColor}` }}
+        style={{ color: `${btnColor}` }}
       >
         Generate
       </button>

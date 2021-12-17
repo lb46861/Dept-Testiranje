@@ -11,13 +11,17 @@ function App() {
   // Get random color on click
   const getRandom = async () => {
     const newClr = await fetchRandom();
-    setCurrColor(newClr.colors[0].hex);
+    let newClrHex;
+    newClr.colors[0].hex === ""
+      ? (newClrHex = "#000")
+      : (newClrHex = "#" + newClr.colors[0].hex);
+    setCurrColor(newClrHex);
 
     if (
-      newClr.colors[0].hex &&
-      !myRndClrs.find((randomColor) => randomColor === newClr.colors[0].hex)
+      newClrHex &&
+      !myRndClrs.find((randomColor) => randomColor === newClrHex)
     ) {
-      setRndClrs([...myRndClrs, newClr.colors[0].hex]);
+      setRndClrs([...myRndClrs, newClrHex]);
     }
   };
 
@@ -34,7 +38,6 @@ function App() {
   // Update List Order
   function handleOnDragEnd(result) {
     if (!result.destination) return;
-
     const items = Array.from(myRndClrs);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);

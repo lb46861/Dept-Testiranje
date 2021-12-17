@@ -3,13 +3,13 @@ const Color = ({ color, currColor }) => {
     <>
       <p
         style={{
-          color: `#${color}`,
+          color: `${color}`,
           fontWeight: `${currColor === color ? "bold" : 100}`,
           border: `${currColor === color ? "2px solid #333" : "none"}`,
           borderRadius: "10px",
         }}
       >
-        #{color}
+        {color}
       </p>
     </>
   );
