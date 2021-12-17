@@ -8,6 +8,7 @@ import InputField from "./components/InputField";
 function App() {
   const [myRndClrs, setRndClrs] = useState([]);
   const [currColor, setCurrColor] = useState("");
+  const [btnText, setBtntext] = useState("");
 
   // Update Color List
   function updateColorList(color) {
@@ -48,6 +49,8 @@ function App() {
 
   // Get color from input
   const handleKeyDown = (event) => {
+    setBtntext(event.target.value);
+
     if (event.key === "Enter") {
       event.preventDefault();
       let inputHex = String(event.target.value);
@@ -70,7 +73,7 @@ function App() {
         <h1>Random Color</h1>
       </div>
       <div className="grid_2">
-        <Button onClick={getRandom} btnColor={currColor} />
+        <Button onClick={getRandom} btnColor={currColor} btnText={btnText} />
       </div>
       <div className="grid_3">
         {myRndClrs.length > 0 ? (

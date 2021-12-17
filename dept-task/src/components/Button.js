@@ -1,4 +1,4 @@
-const Button = ({ onClick, btnColor }) => {
+const Button = ({ onClick, btnColor, btnText }) => {
   return (
     <div>
       <button
@@ -6,7 +6,7 @@ const Button = ({ onClick, btnColor }) => {
         onClick={onClick}
         style={{ color: `${btnColor}` }}
       >
-        Generate
+        {btnText === "" ? "Generate" : btnText}
       </button>
     </div>
   );
