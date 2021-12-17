@@ -1,7 +1,17 @@
-const Color = ({ color }) => {
+const Color = ({ color, currColor }) => {
   return (
     <>
-      <li style={{ color: `#${color}` }}>#{color}</li>
+      <li>
+        <p
+          style={{
+            color: `#${color}`,
+            fontWeight: `${currColor === color ? 900 : 100}`,
+            textDecoration: `${currColor === color ? "underline" : "none"}`,
+          }}
+        >
+          #{color}
+        </p>
+      </li>
     </>
   );
 };

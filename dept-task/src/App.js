@@ -33,11 +33,11 @@ function App() {
   return (
     <div className="App">
       <h1>Dept</h1>
+      {/* <Button onClick={getRandom} btnColor={currColor} /> */}
       <Button onClick={getRandom} btnColor={currColor} />
-
       <>
         {myRndClrs.length > 0 ? (
-          <ColorList colors={myRndClrs} />
+          <ColorList colors={myRndClrs} currColor={currColor} />
         ) : (
           "No Colors To Show :("
         )}

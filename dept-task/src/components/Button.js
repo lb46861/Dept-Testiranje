@@ -7,10 +7,8 @@ const Button = ({ onClick, btnColor }) => {
     <div>
       <button
         className="btn"
-        onClick={() => {
-          onClick();
-          changeColor();
-        }}
+        onClick={onClick}
+        style={{ color: `#${btnColor}` }}
       >
         Color
       </button>
