@@ -7,3 +7,11 @@
   border-radius: 10px;
   background-color: white;
 }
+
+form {
+  margin-top: 20px;
+}
+form input {
+  margin-left: 10px;
+  width: 80px;
+}

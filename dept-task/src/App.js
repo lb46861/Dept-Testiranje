@@ -3,10 +3,18 @@ import Button from "./components/Button";
 import Color from "./components/Color";
 import "./App.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import InputField from "./components/InputField";
 
 function App() {
   const [myRndClrs, setRndClrs] = useState([]);
   const [currColor, setCurrColor] = useState("");
+
+  // Update Color List
+  function updateColorList(color) {
+    if (color && !myRndClrs.find((randomColor) => randomColor === color)) {
+      setRndClrs([...myRndClrs, color]);
+    }
+  }
 
   // Get random color on click
   const getRandom = async () => {
@@ -16,13 +24,7 @@ function App() {
       ? (newClrHex = "#000")
       : (newClrHex = "#" + newClr.colors[0].hex);
     setCurrColor(newClrHex);
-
-    if (
-      newClrHex &&
-      !myRndClrs.find((randomColor) => randomColor === newClrHex)
-    ) {
-      setRndClrs([...myRndClrs, newClrHex]);
-    }
+    updateColorList(newClrHex);
   };
 
   // Fetch random color
@@ -43,6 +45,24 @@ function App() {
     items.splice(result.destination.index, 0, reorderedItem);
     setRndClrs(items);
   }
+
+  // Get color from input
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      let inputHex = String(event.target.value);
+
+      if (
+        (inputHex.length === 7 || inputHex.length === 4) &&
+        inputHex.charAt(0) === "#"
+      ) {
+        setCurrColor(inputHex);
+        updateColorList(inputHex);
+      } else {
+        alert("Check if first element is # and then enter 3 or 6 signs");
+      }
+    }
+  };
 
   return (
     <div className="App">
@@ -90,6 +110,7 @@ function App() {
           <p>No Colors To Show :(</p>
         )}
       </div>
+      <InputField onKeyDown={handleKeyDown} />
     </div>
   );
 }
