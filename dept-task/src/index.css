@@ -20,6 +20,10 @@ ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  border: 2px solid #333;
+  border-radius: 10px;
+  width: 100px;
+  text-align: center;
 }
 ul li {
   padding: 2px;
@@ -31,4 +35,15 @@ ul li p {
   font-weight: 100;
   margin: 0;
   padding: 0;
+}
+.btn {
+  display: bock;
+  border: 1px solid #333;
+  background-color: #fff;
+  padding: 10px 20px;
+  font-weight: 900;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px;
+  border-radius: 20px;
+  cursor: pointer;
 }

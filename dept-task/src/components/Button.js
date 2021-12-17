@@ -1,8 +1,4 @@
 const Button = ({ onClick, btnColor }) => {
-  const changeColor = () => {
-    const myBtn = document.querySelector(".btn");
-    myBtn.style.color = `#${btnColor}`;
-  };
   return (
     <div>
       <button
