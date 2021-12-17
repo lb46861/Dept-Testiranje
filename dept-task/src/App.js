@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import ColorList from "./components/ColorList";
 
 function App() {
   const [myRndClrs, setRndClrs] = useState([]);
@@ -12,11 +13,10 @@ function App() {
 
     // If newColor is not in the list add it
     if (
-      !myRndClrs.find(
-        (randomColor) => randomColor.colors[0].hex === newClr.colors[0].hex
-      )
+      newClr.colors[0].hex &&
+      !myRndClrs.find((randomColor) => randomColor === newClr.colors[0].hex)
     ) {
-      setRndClrs([...myRndClrs, newClr]);
+      setRndClrs([...myRndClrs, newClr.colors[0].hex]);
     }
   };
 
@@ -26,6 +26,7 @@ function App() {
       cache: "no-cache",
     });
     const data = await res.json();
+
     return data;
   };
 
@@ -33,6 +34,14 @@ function App() {
     <div className="App">
       <h1>Dept</h1>
       <Button onClick={getRandom} btnColor={currColor} />
+
+      <>
+        {myRndClrs.length > 0 ? (
+          <ColorList colors={myRndClrs} />
+        ) : (
+          "No Colors To Show :("
+        )}
+      </>
     </div>
   );
 }
