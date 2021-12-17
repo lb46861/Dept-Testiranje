@@ -6,7 +6,7 @@ const Button = ({ onClick, btnColor }) => {
         onClick={onClick}
         style={{ color: `#${btnColor}` }}
       >
-        Color
+        Generate
       </button>
     </div>
   );

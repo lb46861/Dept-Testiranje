@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./components/Button";
-import ColorList from "./components/ColorList";
 import Color from "./components/Color";
+import "./App.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function App() {
@@ -13,7 +13,6 @@ function App() {
     const newClr = await fetchRandom();
     setCurrColor(newClr.colors[0].hex);
 
-    // If newColor is not in the list add it
     if (
       newClr.colors[0].hex &&
       !myRndClrs.find((randomColor) => randomColor === newClr.colors[0].hex)
@@ -32,22 +31,25 @@ function App() {
     return data;
   };
 
-  // Update List after drag
+  // Update List Order
   function handleOnDragEnd(result) {
     if (!result.destination) return;
 
     const items = Array.from(myRndClrs);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
     setRndClrs(items);
   }
 
   return (
     <div className="App">
-      <h1>Dept</h1>
-      <Button onClick={getRandom} btnColor={currColor} />
-      <>
+      <div className="grid_1">
+        <h1>Random Color</h1>
+      </div>
+      <div className="grid_2">
+        <Button onClick={getRandom} btnColor={currColor} />
+      </div>
+      <div className="grid_3">
         {myRndClrs.length > 0 ? (
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId="myRndClrs">
@@ -82,9 +84,9 @@ function App() {
             </Droppable>
           </DragDropContext>
         ) : (
-          "No Colors To Show :("
+          <p>No Colors To Show :(</p>
         )}
-      </>
+      </div>
     </div>
   );
 }

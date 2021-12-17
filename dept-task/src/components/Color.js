@@ -4,8 +4,9 @@ const Color = ({ color, currColor }) => {
       <p
         style={{
           color: `#${color}`,
-          fontWeight: `${currColor === color ? 900 : 100}`,
-          textDecoration: `${currColor === color ? "underline" : "none"}`,
+          fontWeight: `${currColor === color ? "bold" : 100}`,
+          border: `${currColor === color ? "2px solid #333" : "none"}`,
+          borderRadius: "10px",
         }}
       >
         #{color}
