@@ -1,13 +1,11 @@
 import React from "react";
 
-const InputField = ({ onKeyDown }) => {
+const InputField = ({ onKeyUp }) => {
   return (
-    <form>
-      <label>
-        Input HEX color :
-        <input id="inputText" type="text" onKeyDown={onKeyDown} />
-      </label>
-    </form>
+    <label>
+      <h5>Input HEX: </h5>
+      <input id="inputText" type="text" onKeyUp={onKeyUp} />
+    </label>
   );
 };
 

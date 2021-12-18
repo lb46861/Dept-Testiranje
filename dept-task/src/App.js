@@ -26,6 +26,7 @@ function App() {
       : (newClrHex = "#" + newClr.colors[0].hex);
     setCurrColor(newClrHex);
     updateColorList(newClrHex);
+    setBtntext(newClrHex);
   };
 
   // Fetch random color
@@ -34,7 +35,6 @@ function App() {
       cache: "no-cache",
     });
     const data = await res.json();
-
     return data;
   };
 
@@ -69,51 +69,45 @@ function App() {
 
   return (
     <div className="App">
-      <div className="grid_1">
-        <h1>Random Color</h1>
+      <h1>Random Color</h1>
+
+      <Button onClick={getRandom} btnColor={currColor} btnText={btnText} />
+
+      <div className="myList">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="myRndClrs">
+            {(provided) => (
+              <ul
+                className="colorList"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {myRndClrs.map((color, index) => {
+                  return (
+                    <Draggable key={color} draggableId={color} index={index}>
+                      {(provided) => (
+                        <li
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                          <Color
+                            key={index}
+                            color={color}
+                            currColor={currColor}
+                          />
+                        </li>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+                <InputField onKeyUp={handleKeyDown} />
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
-      <div className="grid_2">
-        <Button onClick={getRandom} btnColor={currColor} btnText={btnText} />
-      </div>
-      <div className="grid_3">
-        {myRndClrs.length > 0 ? (
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="myRndClrs">
-              {(provided) => (
-                <ul
-                  className="colorList"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {myRndClrs.map((color, index) => {
-                    return (
-                      <Draggable key={color} draggableId={color} index={index}>
-                        {(provided) => (
-                          <li
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                          >
-                            <Color
-                              key={index}
-                              color={color}
-                              currColor={currColor}
-                            />
-                          </li>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext>
-        ) : (
-          <p>No Colors To Show :(</p>
-        )}
-      </div>
-      <InputField onKeyDown={handleKeyDown} />
     </div>
   );
 }

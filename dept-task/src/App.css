@@ -8,10 +8,10 @@
   background-color: white;
 }
 
-form {
-  margin-top: 20px;
+label {
+  margin-top: 40px;
 }
-form input {
+label input {
   margin-left: 10px;
   width: 80px;
 }
