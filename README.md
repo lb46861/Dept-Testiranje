@@ -1,1 +1,1 @@
-# Dept-Testiranje
+# Random Color Generator
